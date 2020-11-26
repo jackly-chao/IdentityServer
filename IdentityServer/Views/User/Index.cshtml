@@ -1,0 +1,69 @@
+﻿@model List<IdentityServer.Quickstart.User.UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+<link href="~/css/showtip.css" rel="stylesheet" />
+<style>
+    table {
+        table-layout: fixed;
+        word-break: break-all;
+    }
+</style>
+<div>
+    <h2>@ViewData["Title"]</h2>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="Create" asp-route-id="0" class="btn btn-primary">
+                    <span title="Create New" class="glyphicon glyphicon-plus-sign"></span> Add New
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>手机号</th>
+                @*<th>声明</th>*@
+                <th style="width:80px;">Operate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                //var clientModel = item.ToModel();
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    @*<td>
+                            @string.Join(",", clientModel.UserClaims)
+                        </td>*@
+
+                    <td>
+                        <a asp-action="Create" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil">Edit</span>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

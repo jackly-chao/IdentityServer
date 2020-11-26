@@ -1,0 +1,72 @@
+﻿@using IdentityServer4.Extensions
+
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+
+<div class="nav-page">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="~/">
+            <img class="icon-banner" src="~/icon.png">
+            IdentityServer4
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            @if (string.IsNullOrWhiteSpace(name))
+            {
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Account/Login">登录</a>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            资源
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="resourceDropdown">
+                            <a class="dropdown-item" href="~/IdentityResource/Index">认证资源</a>
+                            <a class="dropdown-item" href="~/ApiResource/Index">API资源</a>
+                            <a class="dropdown-item" href="~/ApiScope/Index">API域</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Client/">客户端</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/User/">用户</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Resource/">授权</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @name
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="~/User/Create?id=1">个人信息</a>
+                            <a class="dropdown-item" href="~/User/Create?id=1">修改密码</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Account/Logout">退出</a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </nav>
+</div>
